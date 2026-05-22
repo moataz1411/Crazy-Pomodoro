@@ -4,6 +4,13 @@ const reset=document.getElementById("reset");
 const timer=document.getElementById("timer");
 const music=document.getElementById("music");
 const mute=document.getElementById("mute");
+const classicbutton = document.getElementById("classic");
+const focusbutton = document.getElementById("focus");
+const productivebutton = document.getElementById("productive");
+
+const classic=1500;
+const focus=2100;
+const productive=2700;
 
 let timeLeft=1500;
 let interval;
@@ -44,6 +51,18 @@ const resetTimer=() => {
     music.pause();
     music.currentTime=0;
 }
+const setMode = (time) => {
+    clearInterval(interval);
+    interval=null;
+    timeLeft=time;
+    updateTimer();
+    music.pause();
+    music.currentTime=0;
+}
+classicbutton.addEventListener("click", () => setMode(classic));
+focusbutton.addEventListener("click", () => setMode(focus));
+productivebutton.addEventListener("click", () => setMode(productive));
+
 start.addEventListener("click", startTimer);
 stop.addEventListener("click", stopTimer);
 reset.addEventListener("click",resetTimer);
