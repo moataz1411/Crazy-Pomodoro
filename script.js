@@ -2,6 +2,7 @@ const start=document.getElementById("start");
 const stop=document.getElementById("stop");
 const reset=document.getElementById("reset");
 const timer=document.getElementById("timer");
+const music=document.getElementById("music");
 
 let timeLeft=1500;
 let interval;
@@ -13,13 +14,16 @@ const updateTimer = () => {
 };
 const startTimer = () => {
     if (interval) return;
+    music.play();
     interval=setInterval(() => {
     timeLeft--;
     updateTimer();
     if(timeLeft<=0){
         clearInterval(interval);
-        alert("Congratulations!, Time is up.")
         interval=null;
+        music.pause();
+        music.currentTime=0;
+        alert("Congratulations!, Time is up.");
         timeLeft=1500;
         updateTimer();
         }
@@ -28,12 +32,15 @@ const startTimer = () => {
 const stopTimer = () => {
     clearInterval(interval);
     interval=null;
+    music.pause();
 };
 const resetTimer=() => {
     clearInterval(interval);
     interval=null;
     timeLeft=1500;
     updateTimer();
+    music.pause();
+    music.currentTime=0;
 }
 start.addEventListener("click", startTimer);
 stop.addEventListener("click", stopTimer);
