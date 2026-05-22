@@ -60,3 +60,10 @@ button{
 #reset{
     background-color:rgb(51, 95, 226)
 }
+#mute{
+    top: 20px;
+    right: 20px;
+    position: fixed;
+    background-color:black;
+    
+}

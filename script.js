@@ -3,9 +3,11 @@ const stop=document.getElementById("stop");
 const reset=document.getElementById("reset");
 const timer=document.getElementById("timer");
 const music=document.getElementById("music");
+const mute=document.getElementById("mute");
 
 let timeLeft=1500;
 let interval;
+let isMuted=false;
 
 const updateTimer = () => {
     const minutes=Math.floor(timeLeft/60);
@@ -45,3 +47,13 @@ const resetTimer=() => {
 start.addEventListener("click", startTimer);
 stop.addEventListener("click", stopTimer);
 reset.addEventListener("click",resetTimer);
+mute.addEventListener("click", () => {
+    isMuted=!isMuted;
+    if(isMuted){
+        music.muted=true;
+        mute.textContent="Turn the Music on";
+    } else {
+        music.muted=false;
+        mute.textContent="Mute Music";
+    }
+});
