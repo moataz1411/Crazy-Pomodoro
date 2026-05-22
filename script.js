@@ -9,6 +9,7 @@ const focusbutton = document.getElementById("focus");
 const productivebutton = document.getElementById("productive");
 const fullscreenbutton=document.getElementById("fullscreen");
 const darkmodebutton=document.getElementById("darkmode");
+const stages=document.querySelectorAll(".stage");
 
 function drop(){
     const drop=document.createElement("div");
@@ -22,17 +23,28 @@ function drop(){
 const classic=1500;
 const focus=2100;
 const productive=2700;
+const shortBreak=300;
+const longBreak=900;
 
 let timeLeft=1500;
 let interval;
 let isMuted=false;
 let rainInterval;
+let cycle=0;
+let currentMode = classic;
 
 const updateTimer = () => {
     const minutes=Math.floor(timeLeft/60);
     const seconds=timeLeft%60;
     timer.textContent=`${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
 };
+function updatemap(){
+    if(!stages.length)return;
+    stages.forEach(s=> s.classList.remove("active"));
+    let index= cycle%4;
+    if(cycle===0) index=4;
+ document.getElementById(`s${index}`).classList.add("active");
+}
 const startTimer = () => {
     if (interval) return;
     music.play();
@@ -42,12 +54,22 @@ const startTimer = () => {
     updateTimer();
     if(timeLeft<=0){
         clearInterval(interval);
+        clearInterval(rainInterval);
         interval=null;
         music.pause();
         music.currentTime=0;
-        alert("Congratulations!, Time is up.");
-        timeLeft=1500;
+        cycle++;
+        updatemap();
+        if(cycle%2===1){
+            timeLeft=currentMode;}
+        else { if(cycle%4===0){
+            timeLeft=longBreak;
+        } else {
+            timeLeft=shortBreak;
+        }
+        }
         updateTimer();
+        startTimer();
         }
     }, 1000);
 };
@@ -62,6 +84,8 @@ const resetTimer=() => {
     interval=null;
     clearInterval(rainInterval);
     timeLeft=1500;
+    cycle=0;
+    updatemap();
     updateTimer();
     music.pause();
     music.currentTime=0;
@@ -70,6 +94,7 @@ const setMode = (time) => {
     clearInterval(interval);
     interval=null;
     timeLeft=time;
+    currentMode=time;
     updateTimer();
     music.pause();
     music.currentTime=0;
@@ -108,3 +133,5 @@ darkmodebutton.addEventListener("click", () => {
         darkmodebutton.textContent="Dark Mode 🌙";
     }
 });
+updateTimer();
+updatemap();
