@@ -7,6 +7,7 @@ const mute=document.getElementById("mute");
 const classicbutton = document.getElementById("classic");
 const focusbutton = document.getElementById("focus");
 const productivebutton = document.getElementById("productive");
+const fullscreenbutton=document.getElementById("fullscreen");
 
 const classic=1500;
 const focus=2100;
@@ -74,5 +75,14 @@ mute.addEventListener("click", () => {
     } else {
         music.muted=false;
         mute.textContent="Mute Music";
+    }
+});
+fullscreenbutton.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullscreenbutton.textContent="Exit";
+    }else{
+        document.exitFullscreen();
+        fullscreenbutton.textContent="Fullscreen ⛶";
     }
 });

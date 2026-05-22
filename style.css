@@ -88,3 +88,15 @@ button{
     background: white;
     color: black;
 }
+#fullscreen{
+    position: fixed;
+    bottom: 20px;
+    right:20px;
+    background-color: rgba(250, 250, 250, 0.2);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 15px;
+    padding: 10px 15px;
+}
