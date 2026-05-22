@@ -8,6 +8,7 @@ const classicbutton = document.getElementById("classic");
 const focusbutton = document.getElementById("focus");
 const productivebutton = document.getElementById("productive");
 const fullscreenbutton=document.getElementById("fullscreen");
+const darkmodebutton=document.getElementById("darkmode");
 
 const classic=1500;
 const focus=2100;
@@ -84,5 +85,13 @@ fullscreenbutton.addEventListener("click", () => {
     }else{
         document.exitFullscreen();
         fullscreenbutton.textContent="Fullscreen ⛶";
+    }
+});
+darkmodebutton.addEventListener("click", () => {
+    document.body.classList.toggle("darkmode");
+    if(document.body.classList.contains("darkmode")){
+        darkmodebutton.textContent="Light Mode ☀️";
+    } else {
+        darkmodebutton.textContent="Dark Mode 🌙";
     }
 });
