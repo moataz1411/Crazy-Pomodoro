@@ -10,6 +10,15 @@ const productivebutton = document.getElementById("productive");
 const fullscreenbutton=document.getElementById("fullscreen");
 const darkmodebutton=document.getElementById("darkmode");
 
+function drop(){
+    const drop=document.createElement("div");
+    drop.classList.add("drops");
+    drop.style.left=Math.random()*window.innerWidth+"px";
+    drop.style.setProperty("--drift", (Math.random()*60-30)+"px");
+    drop.style.setProperty("--speed", (Math.random()*1+1)+"s");
+    document.body.appendChild(drop);
+    setTimeout(()=>{drop.remove();},4000);
+}
 const classic=1500;
 const focus=2100;
 const productive=2700;
@@ -17,6 +26,7 @@ const productive=2700;
 let timeLeft=1500;
 let interval;
 let isMuted=false;
+let rainInterval;
 
 const updateTimer = () => {
     const minutes=Math.floor(timeLeft/60);
@@ -26,6 +36,7 @@ const updateTimer = () => {
 const startTimer = () => {
     if (interval) return;
     music.play();
+    rainInterval=setInterval(drop, 100);
     interval=setInterval(() => {
     timeLeft--;
     updateTimer();
@@ -43,11 +54,13 @@ const startTimer = () => {
 const stopTimer = () => {
     clearInterval(interval);
     interval=null;
+    clearInterval(rainInterval);
     music.pause();
 };
 const resetTimer=() => {
     clearInterval(interval);
     interval=null;
+    clearInterval(rainInterval);
     timeLeft=1500;
     updateTimer();
     music.pause();
