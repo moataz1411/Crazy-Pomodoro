@@ -9,7 +9,6 @@ const focusbutton = document.getElementById("focus");
 const productivebutton = document.getElementById("productive");
 const fullscreenbutton=document.getElementById("fullscreen");
 const darkmodebutton=document.getElementById("darkmode");
-const stages=document.querySelectorAll(".stage");
 
 function drop(){
     const drop=document.createElement("div");
@@ -38,13 +37,6 @@ const updateTimer = () => {
     const seconds=timeLeft%60;
     timer.textContent=`${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
 };
-function updatemap(){
-    if(!stages.length)return;
-    stages.forEach(s=> s.classList.remove("active"));
-    let index= cycle%4;
-    if(cycle===0) index=4;
- document.getElementById(`s${index}`).classList.add("active");
-}
 const startTimer = () => {
     if (interval) return;
     music.play();
@@ -59,14 +51,12 @@ const startTimer = () => {
         music.pause();
         music.currentTime=0;
         cycle++;
-        updatemap();
         if(cycle%2===1){
             timeLeft=currentMode;}
-        else { if(cycle%4===0){
+        else if(cycle%4===0){
             timeLeft=longBreak;
         } else {
             timeLeft=shortBreak;
-        }
         }
         updateTimer();
         startTimer();
@@ -84,8 +74,6 @@ const resetTimer=() => {
     interval=null;
     clearInterval(rainInterval);
     timeLeft=1500;
-    cycle=0;
-    updatemap();
     updateTimer();
     music.pause();
     music.currentTime=0;
@@ -133,5 +121,3 @@ darkmodebutton.addEventListener("click", () => {
         darkmodebutton.textContent="Dark Mode 🌙";
     }
 });
-updateTimer();
-updatemap();
