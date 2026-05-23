@@ -158,7 +158,7 @@ letter-spacing: 2px;
 }
 .copyright{
     position:fixed;
-    bottom:15px;
+    bottom: 15px;
     left:50%;
     font-size: 15px;
     transform: translateX(-50%);
