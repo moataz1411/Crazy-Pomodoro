@@ -1,6 +1,6 @@
 # Crazy Pomodoro
 
-A interactive Pomodoro timer built using HTML, CSS, and JavaScript with beautiful UI effects and auto cycle system.
+A interactive Pomodoro timer built using HTML, CSS, and JavaScript with beautiful effects and auto cycle system.
 
 ---
 
